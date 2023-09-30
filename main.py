@@ -1,7 +1,7 @@
 import psycopg2
 from config import db_params, api_key, api_endpoint_urls
-from src.data_extraction import fetch_binary_data
-from src.data_loading import store_binary_data, ensure_table_exists
+from src.data_extraction.extractor import fetch_binary_data
+from src.data_loading.loader import store_binary_data, ensure_table_exists
 
 if __name__ == "__main__":
     # DB connection
