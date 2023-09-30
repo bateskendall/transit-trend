@@ -1,8 +1,5 @@
 import requests
 from typing import Optional
-import logging
-
-logging.basicConfig(level=logging.INFO)
 
 def fetch_binary_data(api_endpoint: str, api_key: str) -> Optional[bytes]:
     """
