@@ -1,6 +1,6 @@
 # MTA Real-time Data Pipeline
 
-This project is designed to fetch, transform, and load real-time data from the MTA's real-time data feeds into a PostgreSQL database. It provides a robust data pipeline for managing and analyzing transit data.
+This project is designed to fetch, transform, and load real-time data from the Metropolitan Transit Authority's GTFS-rt data feeds into a PostgreSQL database. It provides a robust data pipeline for managing and analyzing transit data.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -29,7 +29,7 @@ Before running the pipeline, you'll need to set up a PostgreSQL database and obt
 
 3. **Environment Variables**:
    - It's a good practice to store sensitive information such as your database credentials and API key as environment variables.
-   - You can use libraries such as `python-decouple` to manage your environment variables.
+   - You can use libraries such as `python-decouple` to manage your environment variables. Place them in a .env file and the config.py will pull them to authenticate.
 
 ### Steps
 
