@@ -8,6 +8,12 @@ from src.data_loading.tf_loader import load_trip_updates, load_vehicle_positions
 from config import api_key, api_endpoint_urls
 
 def job(conn) -> None:
+    """Main job function to orchestrate data fetching, processing, and loading.
+
+    Args:
+        conn: The database connection object.
+    """
+    
     logging.info("Starting job...")
     try:
         ensure_table_exists(conn)
@@ -34,11 +40,15 @@ def job(conn) -> None:
         logging.error(f"Error: {e}")
 
 def setup_schedule(conn) -> None:
+    """Schedules tasks to run at specified intervals.
+
+    This function sets up a schedule for the main job function, to run at a regular interval
+    (e.g., every 30 seconds).
+
+    Args:
+        conn: The database connection object.
     """
-    Schedules tasks to run at specified intervals.
-    Returns:
-    None
-    """
+    
     logging.info("Setting up schedule...")
     schedule.every(30).seconds.do(job, conn)  # Adjust this to every minute or as needed
 

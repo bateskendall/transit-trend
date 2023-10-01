@@ -1,13 +1,14 @@
 import psycopg2
 import logging
-from typing import List, Any
+from typing import List
 
 def store_binary_data(binary_data_list: List[bytes], conn: psycopg2.extensions.connection) -> None:
     """
-    Load binary data into database for later use.
+    Load binary data into the database for later use.
     
-    :param binary_data_list: A list containing all binary files fetched from the API endpoints.
-    :param conn: The database connection.
+    Args:
+        binary_data_list (List[bytes]): A list containing all binary files fetched from the API endpoints.
+        conn (psycopg2.extensions.connection): A database connection object.
     """
     
     for i, binary_data in enumerate(binary_data_list):
@@ -16,16 +17,17 @@ def store_binary_data(binary_data_list: List[bytes], conn: psycopg2.extensions.c
                 query = "INSERT INTO Realtime_Binary_Data (binary_data) VALUES (%s::bytea);"
                 cur.execute(query, (binary_data,))
             conn.commit()
-            logging.info(f"Stored binary data entry {i}")
+            logging.info(f"Stored binary data entry")
         except psycopg2.Error as e:
             logging.exception(f"A database error occurred with binary data entry {i}")
             conn.rollback()
             
 def ensure_table_exists(conn: psycopg2.extensions.connection) -> None:
     """
-    Create tables for storing extracted data if it doesn't already exist.
+    Create tables for storing extracted data if they don't already exist.
 
-    :param conn: The database connection.
+    Args:
+        conn (psycopg2.extensions.connection): A database connection object.
     """
     
     commands = (

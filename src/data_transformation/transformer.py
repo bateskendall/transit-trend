@@ -1,12 +1,24 @@
-from .binary_decoder import decode_binary
-import time
 import datetime
-import psycopg2
 import logging
+import time
+from typing import Optional, Tuple, List, Dict
+
+import psycopg2
+
+from .binary_decoder import decode_binary
 
 logging.basicConfig(level=logging.DEBUG)
 
-def extract_trip_updates(trip_update):
+def extract_trip_updates(trip_update) -> List[Dict]:
+    """
+    Extracts trip update information from a Protobuf message.
+
+    Args:
+        trip_update (protobuf message): A Protobuf message containing trip update information.
+
+    Returns:
+        List[Dict]: A list of dictionaries, each containing information about a trip update.
+    """
     trip_updates = []  # list to hold extracted trip updates
     trip = trip_update.trip_update.trip
     for stop_time_update in trip_update.trip_update.stop_time_update:
@@ -23,11 +35,29 @@ def extract_trip_updates(trip_update):
     return trip_updates  # return list of extracted values
 
 # Helper function to convert epoch timestamp to time
-def epoch_to_time(epoch):
+def epoch_to_time(epoch: int) -> str:
+    """
+    Converts an epoch timestamp to a time string in the format HH:MM:SS.
+
+    Args:
+        epoch (int): The epoch timestamp to convert.
+
+    Returns:
+        str: The time as a string in the format HH:MM:SS.
+    """
     return time.strftime('%H:%M:%S', time.gmtime(epoch))
 
 
-def extract_vehicle_positions(vehicle_position):
+def extract_vehicle_positions(vehicle_position) -> List[Dict]:
+    """
+    Extracts vehicle position information from a Protobuf message.
+
+    Args:
+        vehicle_position (protobuf message): A Protobuf message containing vehicle position information.
+
+    Returns:
+        List[Dict]: A list of dictionaries, each containing information about a vehicle's position.
+    """
     vehicle_positions = []  # List to hold extracted vehicle positions
     vehicle = vehicle_position.vehicle  # Assuming vehicle_position is the correct Protobuf message
     vehicle_stop_status = vehicle.vehicle_stop_status if hasattr(vehicle, 'vehicle_stop_status') else None
@@ -42,7 +72,17 @@ def extract_vehicle_positions(vehicle_position):
     vehicle_positions.append(values)  # Append extracted values to list
     return vehicle_positions  # Return list of extracted values
 
-def extract_alerts(alert):
+def extract_alerts(alert) -> List[Dict]:
+    """
+    Extracts alert information from a Protobuf message.
+
+    Args:
+        alert (protobuf message): A Protobuf message containing alert information.
+
+    Returns:
+        List[Dict]: A list of dictionaries, each containing information about an alert.
+    """
+    
     alerts = []  # List to hold extracted alerts
     for informed_entity in alert.alert.informed_entity:
         for translation in alert.alert.header_text.translation:
@@ -55,7 +95,20 @@ def extract_alerts(alert):
             alerts.append(values)  # Append extracted values to list
     return alerts  # Return list of extracted values
 
-def process_feed(binary_data, conn):
+def process_feed(binary_data: bytes, conn) -> Tuple[List[Dict], List[Dict], List[Dict]]:
+    """
+    Processes a binary feed message by decoding it and extracting trip updates, 
+    vehicle positions, and alerts.
+
+    Args:
+        binary_data (bytes): The binary feed message to process.
+        conn (connection object): A database connection object.
+
+    Returns:
+        Tuple[List[Dict], List[Dict], List[Dict]]: A tuple containing three lists of dictionaries 
+        for trip updates, vehicle positions, and alerts.
+    """
+    
     # Decode binary data using decode_binary
     feed_message = decode_binary(binary_data)
 

@@ -1,8 +1,16 @@
+from typing import List, Dict
 import psycopg2
 import logging
 
-def load_trip_updates(trip_updates, conn):
-    """Load trip updates into the database."""
+def load_trip_updates(trip_updates: List[Dict], conn: psycopg2.extensions.connection) -> None:
+    """
+    Load trip updates into the database.
+
+    Args:
+        trip_updates (list): A list of trip update dictionaries.
+        conn (psycopg2.extensions.connection): The database connection object.
+    """
+    
     with conn.cursor() as cur:
         for trip_update in trip_updates:
             try:
@@ -21,8 +29,15 @@ def load_trip_updates(trip_updates, conn):
             else:
                 conn.commit()
 
-def load_vehicle_positions(vehicle_positions, conn):
-    """Load vehicle positions into the database."""
+def load_vehicle_positions(vehicle_positions: List[Dict], conn: psycopg2.extensions.connection) -> None:
+    """
+    Load vehicle positions into the database.
+    
+    Args:
+        vehicle_positions (list): A list of vehicle position dictionaries.
+        conn (psycopg2.extensions.connection): The database connection object.
+    """
+    
     with conn.cursor() as cur:
         for vehicle_position in vehicle_positions:
             try:
@@ -41,8 +56,15 @@ def load_vehicle_positions(vehicle_positions, conn):
             else:
                 conn.commit()
 
-def load_alerts(alerts, conn):
-    """Load alerts into the database."""
+def load_alerts(alerts: List[Dict], conn: psycopg2.extensions.connection) -> None:
+    """
+    Load alerts into the database.
+    
+    Args:
+        alerts (list): A list of alert dictionaries.
+        conn (psycopg2.extensions.connection): The database connection object.
+    """
+    
     with conn.cursor() as cur:
         for alert in alerts:
             try:
@@ -58,8 +80,22 @@ def load_alerts(alerts, conn):
             else:
                 conn.commit()
 
-def load_all_data(trip_updates, vehicle_positions, alerts, conn):
-    """A wrapper function to load all extracted data into the database."""
+def load_all_data(
+        trip_updates: List[Dict],
+        vehicle_positions: List[Dict],
+        alerts: List[Dict],
+        conn: psycopg2.extensions.connection
+    ) -> None:
+    """
+    A wrapper function to load all extracted data into the database.
+
+    Args:
+        trip_updates (list): A list of trip update dictionaries.
+        vehicle_positions (list): A list of vehicle position dictionaries.
+        alerts (list): A list of alert dictionaries.
+        conn (psycopg2.extensions.connection): The database connection object.
+    """
+    
     load_trip_updates(trip_updates, conn)
     load_vehicle_positions(vehicle_positions, conn)
     load_alerts(alerts, conn)
