@@ -65,5 +65,5 @@ python main.py
 - transformer.py: Module for transforming the binary data into a structured format.
 - tf_loader.py: Module for loading the structured data into the PostgreSQL database.
 - scheduler.py: Module for scheduling the data fetching, transformation, and loading processes.
-- load_static_gtfs.py: Module for loading static gtfs data from .txt files in /data folder.
+- load_static_gtfs.py: Module for loading static gtfs data from .txt files in /data folder into the PostgreSQL database.
 
