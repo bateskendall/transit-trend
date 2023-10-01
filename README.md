@@ -21,7 +21,6 @@ Before running the pipeline, you'll need to set up a PostgreSQL database and obt
 1. **Database Setup**:
    - Install [PostgreSQL](https://www.postgresql.org/download/) if you haven't already.
    - Create a new database for this project.
-   - Update the `config.py` file with your database credentials.
 
 2. **API Key**:
    - Visit the [MTA Real-Time Data Feeds page](https://api.mta.info/#/signup) to sign up for an API key.
