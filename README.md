@@ -28,7 +28,7 @@ Before running the pipeline, you'll need to set up a PostgreSQL database and obt
 
 3. **Environment Variables**:
    - It's a good practice to store sensitive information such as your database credentials and API key as environment variables.
-   - You can use libraries such as `python-decouple` to manage your environment variables. Place them in a .env file and the config.py file will pull them to authenticate.
+   - Place them in a .env file and the config.py file will pull them to authenticate.
 
 ### Steps
 
