@@ -34,7 +34,7 @@ Before running the pipeline, you'll need to set up a PostgreSQL database and obt
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/transit-trend.git
+git clone https://github.com/bateskendall/transit-trend.git
 cd transit-trend
 ```
 
