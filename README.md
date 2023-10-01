@@ -15,6 +15,22 @@ This project is designed to fetch, transform, and load real-time data from the M
 - Python 3.7 or later
 - PostgreSQL
 
+### Database Setup and API Key
+Before running the pipeline, you'll need to set up a PostgreSQL database and obtain an API key from MTA.
+
+1. **Database Setup**:
+   - Install [PostgreSQL](https://www.postgresql.org/download/) if you haven't already.
+   - Create a new database for this project.
+   - Update the `config.py` file with your database credentials.
+
+2. **API Key**:
+   - Visit the [MTA Real-Time Data Feeds page](https://api.mta.info/#/signup) to sign up for an API key.
+   - Once you have the key, add it to your environment variables as `MTA_API_KEY`.
+
+3. **Environment Variables**:
+   - It's a good practice to store sensitive information such as your database credentials and API key as environment variables.
+   - You can use libraries such as `python-decouple` to manage your environment variables.
+
 ### Steps
 
 1. Clone the repository:
